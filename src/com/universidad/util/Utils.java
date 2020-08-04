@@ -6,7 +6,7 @@ import java.util.Properties;
 public class Utils {
 
     public static String[] getProperties() throws Exception{
-        String[] properties = new String[5];
+        String[] properties = new String[6];
         Properties p = new Properties();
         String path = "src\\com\\universidad\\bd.properties";
 
@@ -18,6 +18,7 @@ public class Utils {
             properties[2]= p.getProperty("baseDatos");
             properties[3]= p.getProperty("usuario");
             properties[4]= p.getProperty("password");
+            properties[5]= p.getProperty("tipoRepo");
 
             return properties;
 

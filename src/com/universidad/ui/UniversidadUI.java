@@ -1,6 +1,7 @@
 package com.universidad.ui;
 
-import com.universidad.tl.UniversidadController;
+import com.universidad.tl.CursoController;
+import com.universidad.tl.EstudianteController;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -9,7 +10,8 @@ public class UniversidadUI {
 
     static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
     static PrintStream   out = System.out;
-    static UniversidadController gestor = new UniversidadController();
+    static EstudianteController gEstudiante = new EstudianteController();
+    static CursoController gCurso = new CursoController();
 
     public static void main(String[] args) {
         try{
@@ -22,10 +24,14 @@ public class UniversidadUI {
     public static void mostrarMenu() throws Exception {
         int opcion;
         do{
-            out.println("1. Listar Estudiante");
+            out.println("1. Listar Estudiantes");
             out.println("2. Registrar Estudiante");
-            out.println("3. Modificar Estudiante ");
-            out.println("4. Eliminar Estudiante ");
+            out.println("3. Modificar Estudiante");
+            out.println("4. Eliminar Estudiante");
+            out.println("5. Registar un curso");
+            out.println("6. Modificar curso");
+            out.println("7. Buscar un curso por código");
+            out.println("8. Listar Cursos");
             out.println("0. Salir");
             out.print("Digite la opción que desee: ");
             opcion = Integer.parseInt(in.readLine());
@@ -47,6 +53,18 @@ public class UniversidadUI {
             case 4:
                 eliminar();
                 break;
+            case 5:
+                registrarCurso();
+                break;
+            case 6:
+                modificarCurso();
+                break;
+            case 7:
+                buscarCurso();
+                break;
+            case 8:
+                listarCursos();
+                break;
             case 0:
                 out.println("Adiós");
                 break;
@@ -67,7 +85,7 @@ public class UniversidadUI {
         int edad = Integer.parseInt(in.readLine());
 
         try {
-            String resultado = gestor.guardarEstudiante(cedula,nombre,apellido,edad);
+            String resultado = gEstudiante.guardarEstudiante(cedula,nombre,apellido,edad);
             out.println(resultado);
         }catch(Exception ex){
             out.println(ex);
@@ -86,7 +104,7 @@ public class UniversidadUI {
         int edad = Integer.parseInt(in.readLine());
 
         try {
-            String resultado = gestor.modificarEstudiante(cedula,nombre,apellido,edad);
+            String resultado = gEstudiante.modificarEstudiante(cedula,nombre,apellido,edad);
             out.println(resultado);
         }catch(Exception ex){
             out.println(ex);
@@ -98,7 +116,7 @@ public class UniversidadUI {
         String cedula = in.readLine();
 
         try {
-            String resultado = gestor.eliminarEstudiante(cedula);
+            String resultado = gEstudiante.eliminarEstudiante(cedula);
             out.println(resultado);
         }catch(Exception ex){
             out.println(ex);
@@ -107,12 +125,68 @@ public class UniversidadUI {
 
     public static void listar(){
         ArrayList<String> lista;
-
         try
         {
-           lista = gestor.listarEstudiantes();
+           lista = gEstudiante.listarEstudiantes();
             for (String infoEstudiante :lista) {
                 out.println(infoEstudiante);
+            }
+        }catch(Exception ex){
+            out.println(ex);
+        }
+    }
+
+    public static void registrarCurso() throws Exception{
+        out.println("Indique el código del curso:");
+        String codigo = in.readLine();
+        out.println("Indique el nombre del curso:");
+        String nombre = in.readLine();
+        out.println("Indique la cantidad de créditos:");
+        int creditos = Integer.parseInt(in.readLine());
+
+        try {
+            String resultado = gCurso.registrarCurso(codigo,nombre,creditos);
+            out.println(resultado);
+        }catch(Exception ex){
+            out.println(ex);
+        }
+    }
+
+    public static void modificarCurso() throws Exception{
+        out.println("Indique el código del curso:");
+        String codigo = in.readLine();
+        out.println("Indique el nuevo nombre del curso:");
+        String nombre = in.readLine();
+        out.println("Indique la nueva cantidad de créditos:");
+        int creditos = Integer.parseInt(in.readLine());
+
+        try {
+            String resultado = gCurso.modificarCurso(codigo,nombre,creditos);
+            out.println(resultado);
+        }catch(Exception ex){
+            out.println(ex);
+        }
+    }
+
+    public static void buscarCurso() throws Exception{
+        out.println("Indique el código del curso:");
+        String codigo = in.readLine();
+
+        try {
+            String resultado = gCurso.buscarCurso(codigo);
+            out.println(resultado);
+        }catch(Exception ex){
+            out.println(ex);
+        }
+    }
+
+    public static void listarCursos(){
+        ArrayList<String> lista;
+        try
+        {
+            lista = gCurso.listarCursos();
+            for (String infoCurso :lista) {
+                out.println(infoCurso);
             }
         }catch(Exception ex){
             out.println(ex);

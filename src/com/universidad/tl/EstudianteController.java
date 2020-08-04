@@ -5,32 +5,31 @@ import com.universidad.bl.dao.DaoFactory;
 
 import java.util.ArrayList;
 
-public class UniversidadController {
+public class EstudianteController {
 
-    //IEstudianteDAO logica = new MySqlEstudianteImp();
     private DaoFactory factory;
-    private IEstudianteDAO dao;
+    private IEstudianteDAO estudianteDao;
 
-    public UniversidadController(){
+    public EstudianteController(){
         factory = DaoFactory.getDaoFactory();
-        dao = factory.getEstudianteImp();
+        estudianteDao = factory.getEstudianteImp();
     }
 
     public String guardarEstudiante(String cedula, String nombre, String apellido, int edad) throws Exception{
         Estudiante estudiante = new Estudiante(cedula,nombre,apellido,edad);
-        return dao.guardarEstudiante(estudiante);
+        return estudianteDao.guardarEstudiante(estudiante);
     }
 
     public String modificarEstudiante(String cedula, String nombre, String apellido, int edad) throws Exception{
         Estudiante estudiante = new Estudiante(cedula,nombre,apellido,edad);
-        return dao.modificarEstudiante(estudiante);
+        return estudianteDao.modificarEstudiante(estudiante);
     }
 
     public String eliminarEstudiante(String cedula) throws Exception{
-        return dao.eliminarEstudiante(cedula);
+        return estudianteDao.eliminarEstudiante(cedula);
     }
 
     public ArrayList<String> listarEstudiantes() throws Exception{
-        return dao.obtenerEstudiantes();
+        return estudianteDao.obtenerEstudiantes();
     }
 }

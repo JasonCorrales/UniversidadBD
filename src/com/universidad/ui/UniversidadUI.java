@@ -1,5 +1,6 @@
 package com.universidad.ui;
 
+import com.universidad.tl.CarreraController;
 import com.universidad.tl.CursoController;
 import com.universidad.tl.EstudianteController;
 
@@ -12,6 +13,7 @@ public class UniversidadUI {
     static PrintStream   out = System.out;
     static EstudianteController gEstudiante = new EstudianteController();
     static CursoController gCurso = new CursoController();
+    static CarreraController gCarrera = new CarreraController();
 
     public static void main(String[] args) {
         try{
@@ -32,6 +34,10 @@ public class UniversidadUI {
             out.println("6. Modificar curso");
             out.println("7. Buscar un curso por código");
             out.println("8. Listar Cursos");
+            out.println("9. Registrar Carrera");
+            out.println("10.Buscar Carrera");
+            out.println("11.Listar Carreras");
+            out.println("12.Asociar un Curso a una Carrera");
             out.println("0. Salir");
             out.print("Digite la opción que desee: ");
             opcion = Integer.parseInt(in.readLine());
@@ -64,6 +70,18 @@ public class UniversidadUI {
                 break;
             case 8:
                 listarCursos();
+                break;
+            case 9:
+                registrarCarrera();
+                break;
+            case 10:
+                buscarCarrera();
+                break;
+            case 11:
+                listarCarreras();
+                break;
+            case 12:
+                asociarCursoCarrera();
                 break;
             case 0:
                 out.println("Adiós");
@@ -187,6 +205,57 @@ public class UniversidadUI {
             lista = gCurso.listarCursos();
             for (String infoCurso :lista) {
                 out.println(infoCurso);
+            }
+        }catch(Exception ex){
+            out.println(ex);
+        }
+    }
+
+   public static void registrarCarrera() throws Exception{
+       out.println("Indique el código de la Carrera:");
+       String codigo = in.readLine();
+       out.println("Indique el nombre de la Carrera:");
+       String nombre = in.readLine();
+
+       try {
+           String resultado = gCarrera.registrarCarrera(codigo,nombre);
+           out.println(resultado);
+       }catch(Exception ex){
+           out.println(ex);
+       }
+   }
+
+    public static void buscarCarrera() throws Exception{
+        out.println("Indique el código de la Carrera:");
+        String codigo = in.readLine();
+        try {
+            String resultado = gCarrera.buscarCarrera(codigo);
+            out.println(resultado);
+        }catch(Exception ex){
+            out.println(ex);
+        }
+    }
+
+    public static void asociarCursoCarrera() throws Exception{
+        out.println("Indique el código de la Carrera:");
+        String codigoCarrera = in.readLine();
+        out.println("Indique el código del curso:");
+        String codigoCurso = in.readLine();
+        try {
+            String resultado = gCarrera.asociarCursoCarrera(codigoCarrera,codigoCurso);
+            out.println(resultado);
+        }catch(Exception ex){
+            out.println(ex);
+        }
+    }
+
+    public static void listarCarreras(){
+        ArrayList<String> lista;
+        try
+        {
+            lista = gCarrera.listarCarreras();
+            for (String infoCarrera :lista) {
+                out.println(infoCarrera);
             }
         }catch(Exception ex){
             out.println(ex);

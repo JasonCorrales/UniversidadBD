@@ -1,5 +1,6 @@
 package com.universidad.bl.dao;
 
+import com.universidad.bl.Carrera.ICarreraDAO;
 import com.universidad.bl.Curso.ICursoDAO;
 import com.universidad.bl.Estudiante.IEstudianteDAO;
 import com.universidad.util.Utils;
@@ -32,4 +33,5 @@ public abstract class DaoFactory {
 
     public abstract IEstudianteDAO getEstudianteImp();
     public abstract ICursoDAO getCursoImp();
+    public abstract ICarreraDAO getCarreraImp();
 }

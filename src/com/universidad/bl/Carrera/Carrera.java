@@ -47,8 +47,12 @@ public class Carrera {
         this.listCursos = listCursos;
     }
 
+    public void agregarCurso(Curso curso){
+        this.listCursos.add(curso);
+    }
+
     private String getInfoCurso(){
-        String infoCursos = "--- Listado de Cursos ---";
+        String infoCursos = "--- Listado de Cursos ---\n";
         for (Curso curso:listCursos) {
             infoCursos+= curso.toString()+"\n";
         }
